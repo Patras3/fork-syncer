@@ -1,0 +1,22 @@
+# IMPORTANT !!!
+# This worklow should be a part of your own fork of fork-syncer with different basic branch to prefent possibility of token leak made by adjustments of script in source repo.
+# All updates of fork-syncer base branch should be took with with caution
+name: Sync forks daily
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN_FULL }}
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v3
+      # Run sync script
+      - name: Run syncer
+        run: ./fork-syncer.sh
