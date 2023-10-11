@@ -18,6 +18,8 @@ github_username=$(gh api user | jq -r '.login')
 # List and iterate through the forked repositories to synchronize
 gh repo list --fork --json name "$github_username" | jq -c '.[]' | while read -r repo_data; do
   repo_name=$(echo "$repo_data" | jq -r '.name')
+  echo "*"
   echo "Syncing repo: $repo_name" 
-  gh repo sync "$github_username/$repo_name" || echo "Sync failed"
+  gh repo sync "$github_username/$repo_name" || echo "!!! Sync failed for $repo_name !!!"
+  echo "*"
 done
