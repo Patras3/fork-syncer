@@ -4,7 +4,7 @@
 name: Sync forks daily
 
 env:
-  GH_TOKEN: ${{ secrets.GH_TOKEN_FULL }}
+  GH_TOKEN: ${{ secrets.SYNC_FORK_TOKEN }}
 
 on:
   schedule:
